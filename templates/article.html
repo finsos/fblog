@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% load static %}
+{% load fblog_tags %}
+
+{% block content %}
+{% for article in article_list %}
+    <div class="article_detail">
+        <h1>{{ article.title }}</h1>
+        <span style="color: gray;font-size: 14px">作者： {{ article.author }}，{{ article.content|count_words }} 字，{{ article.views }} 阅读</span>
+        {% autoescape off %}
+        <aside>{{ article.content }}</aside>
+        {% endautoescape %}
+    </div>
+    <div style="margin-top: 3em;">
+        <hr size=1 color=#B0B0B0 width=100% noshade>
+        <span>{{ comment_num }} 条评论</span>
+    </div>
+    <div id="comment-div" style="margin-top: 1em;">
+        {% if request.user.is_authenticated %}
+            <div id="comment-block">
+                <div id="comment-txt">
+                {% csrf_token %}
+                {% for field in form %}
+                    {{ field }}
+                {% endfor %}
+                    <a id="comment-start-btn" href="javascript:void(0)" onclick="commentStart()">评论</a>
+                </div>
+            </div>
+        {% else %}
+            <span style="text-align: center;">
+                <p>请<a style="font-size: 18px;" href="javascript:void(0)" onclick="userLogin()">登录</a>后评论！</p>
+            </span>
+        {% endif %}
+        <div id="comment-show">
+            <h2>评论列表</h2>
+            <hr size="1" color="#B0B0B0">
+        </div>
+        <div id="comment-list">
+            {% for comment in comment_list %}
+                <li style="list-style: none;">
+                  <span id="comment-user"><a class="github-user-link" style="align-items:center;" href="https://github.com/{{ comment.user.profile.user|default:'#' }}"><img src="{{ comment.user.profile.avatar }}&size=40">{{ comment.user }}</a>&nbsp说：</span>
+                  <span id="comment-user-id" hidden>{{ comment.user_id }}</span>
+                  <span id="comment-id" style="color: gray;font-size: 14px;float: right;">#{{ forloop.revcounter }}</span>
+                  <div id="comment-content" style="padding-bottom: 0.5em;padding-top: 0.2em;padding-left: 2em;">
+                    {{ comment.content }}
+                  </div>
+                  <time id="comment-time" style="color: gray;font-size: 14px;">{{ comment.time }}</time>
+                  {% if request.user.is_authenticated %}
+                  <a href="javascript:void(0)" id="comment-reply-btn" style="color: gray;font-size: 14px;" onclick="commentReply('{{ comment.user }}',{{ comment.id }},'')" onmousemove="this.style.color='#00a4ff'" onmouseout="this.style.color='gray'">回复</a>
+                      {% if comment.user == request.user %}
+                        <a href="javascript:void(0)" id="comment-delete-btn" style="color: gray;font-size: 14px;" onmousemove="this.style.color='#00a4ff'" onmouseout="this.style.color='gray'" onclick="commentDelete({{ comment.id }})">删除</a>
+                    {% endif %}
+                  {% endif %}
+                  {% if reply_list != '' %}
+                      {% for reply in reply_list %}
+                          {% if reply.comment_id == comment.id %}
+                              <div id="reply-list">
+                                  <span class="username"><a class="github-user-link" style="align-items:center;" href="https://github.com/{{ reply.user.profile.user|default:'#' }}"><img src="{{ reply.user.profile.avatar }}&size=40">{{ reply.user }}</a>&nbsp>>><a class="github-user-link" href="https://github.com/{{ reply.reply.user.profile.user|default:'#' }}"><img src="{{ reply.reply.user.profile.avatar }}&size=40">{{ reply.reply.user|default:comment.user }}：</a></span>
+                                <div style="padding-bottom: 0.5em;padding-top: 0.2em;padding-left: 2em;">
+                                    {{ reply.content }}
+                                </div>
+                                <time id="reply-time" style="color: gray;font-size: 14px;">{{ reply.time }}</time>
+                                {% if request.user.is_authenticated %}
+                                <a href="javascript:void(0)" id="comment-reply-btn2" style="color: gray;font-size: 14px;" onclick="commentReply('{{ reply.user }}',{{ reply.comment.id }},{{ reply.id }})" onmousemove="this.style.color='#00a4ff'" onmouseout="this.style.color='gray'">回复</a>
+                                    {% if reply.user == request.user %}
+                                        <a href="javascript:void(0)" id="reply-delete-btn" style="color: gray;font-size: 14px;" onmousemove="this.style.color='#00a4ff'" onmouseout="this.style.color='gray'" onclick="commentReplyDelete({{ reply.id }})">删除</a>
+                                    {% endif %}
+                                {% endif %}
+                              </div>
+                          {% endif %}
+                      {% endfor %}
+                  {% endif %}
+                  <hr size=1 color=#B0B0B0 width=100% noshade>
+                </li>
+            {% empty %}
+            暂无评论!
+            {% endfor %}
+        </div>
+        <div id="comment-outer">
+            <div id="comment-form">
+                {% csrf_token %}
+                {% for field in form %}
+                    {{ field }}
+                {% endfor %}
+                 <div>
+                     <span id="comment-re" style="color: gray;font-size: 14px;"></span>
+                     <a href="javascript:void(0)" id="comment-save">评论</a>
+                     <a href="javascript:void(0)" id="comment-cancel">取消</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+<script src="{% static "js/comment.js" %}"></script>
+{% endblock %}

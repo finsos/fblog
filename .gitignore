@@ -1,0 +1,7 @@
+*__pycache__
+*.pyc
+/.idea
+database/*.sqlite3
+static/media/cover/
+static/media/image/
+web/migrations/

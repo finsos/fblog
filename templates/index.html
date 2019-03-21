@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+            {% for article in article_list %}
+                <h2><a href="{% url 'article' article.id %}">{{ article }}</a></h2>
+                <!-- <img src="{ article.cover.url }" height="150px" width="150px"> -->
+                    <p style="white-space:inherit;width:90%;">{{ article.abstract|truncatechars:100 }}...<a href="{% url 'article' article.id %}">阅读全文>>></a></p>
+                    <span style="font-size: 14px;color: gray;">{{ article.last_modified_time }}</span>
+                    <span style="font-size: 14px;color: gray;margin-left: 0.5em;">{{ article.views }} 阅读</span>
+                    <span style="font-size: 14px;color: gray;margin-left: 0.5em;">分类: <a href="{% url 'category' cate=article.category %}">{{ article.category }}</a></span>
+            {% endfor %}
+{% endblock %}

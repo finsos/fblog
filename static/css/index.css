@@ -1,0 +1,220 @@
+body {
+    padding: 0 auto;
+    margin: 0 auto;
+}
+
+p {
+    font-family: arial,"Hiragino Sans GB","Microsoft Yahei",sans-serif;
+}
+
+a {
+    color: black;
+    text-decoration:none;
+}
+
+a:hover {
+    color: #00a4ff;
+    text-decoration:none;
+}
+
+textarea {
+    float: left;
+    width: 100%;
+    height: 8rem;
+}
+/*
+    font-family:"Microsoft YaHei",Arial,Helvetica,sans-serif,"宋体";
+    font-family: arial,"Hiragino Sans GB","Microsoft Yahei",sans-serif;
+*/
+.logo {
+    text-align: left;
+}
+
+#header {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+#header a.title {
+    float: left;
+    text-shadow: 5px 5px 5px silver;
+    font-size: 2.5em;
+    font-weight: bold;
+
+}
+/*
+#header a.login {
+    margin-right: 6em;
+    margin-top: 1em;
+}
+*/
+
+#content div.left-sidebar {
+    float: left;
+    margin-left: 2em;
+    width: 20%;
+}
+
+#content div.left-sidebar li {
+        list-style: none;
+}
+
+#content div.article {
+    float: left;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 50px;
+    width: 45%;
+}
+
+#content div.right-sidebar {
+    float: right;
+    margin-right: 2em;
+    width: 20%;
+}
+
+#content div.right-sidebar li {
+        list-style: none;
+}
+
+#footer {
+    height: auto;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background: #333;
+    color: #fff;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+#comment-start-btn {
+    margin-left: 95%;
+    margin-top: 1%;
+    width: 50px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border: 1px #0070C0 solid;
+    border-radius: 3px;
+    /*color: #fff;*/
+    display: inline-block;
+    text-decoration: none;
+    font-size: 14px;
+    outline: none;
+}
+
+#comment-save {
+    margin-left: 70%;
+}
+
+#comment-outer {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:100;
+    padding-top:10%;
+    text-align:center;
+    background-repeat:no-repeat;
+    background-position:center center;
+    background-color:#000;
+    background-color:rgba(0,0,0,0.5);
+    filter:alpha(opacity=50);
+    display: none;
+}
+
+#comment-form {
+    width:300px;
+    z-index: 1;
+    margin: 100px auto;
+    background-color: #fff;
+    border:1px solid #000;
+    padding:15px;
+    text-align:center;
+}
+
+#comment-list a:hover {
+    color: #00a4ff;
+    text-decoration:none;
+}
+
+#comment-user {
+    display: flex;
+    align-items:center;
+    color:gray;
+    font-size:14px;
+}
+
+
+#login-user {
+    float: right;
+    font-size: 18px;
+    margin-right: 6em;
+}
+
+
+#login-outer {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:100;
+    padding-top:10%;
+    text-align:center;
+    background-repeat:no-repeat;
+    background-position:center center;
+    background-color:#000;
+    background-color:rgba(0,0,0,0.5);
+    filter:alpha(opacity=50);
+    display: none;
+}
+
+#login-inter {
+    width:300px;
+    height: 150px;
+    z-index: 1;
+    margin: auto;
+    background-color: #fff;
+    border:1px solid #000;
+    padding:15px;
+    text-align:center;
+    box-shadow: 10px 10px 5px black;
+}
+
+
+#login-outer .github-login-cancel {
+    float: right;
+    margin-top: 6em;
+    font-size: 18px;
+    color: gray;
+}
+
+#reply-list {
+    padding-left: 4em;
+    padding-top: 1em;
+}
+
+
+#reply-list span.username {
+    display: flex;
+    align-items:center;
+    color:gray;
+    font-size:14px;
+}
+
+
+.github-user-link {
+    display:flex;
+    align-items:center;
+}
+
+.github-user-link img {
+    width: 40px;
+    height: 40px;
+    margin-right: 0.5em;
+    border-radius: 4em;
+}

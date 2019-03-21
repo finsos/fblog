@@ -1,0 +1,147 @@
+{% load static %}
+{% load fblog_tags %}
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+    <link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/default.min.css" rel="stylesheet">
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <div id="header">
+        <div>
+            <a class="title" href="{% url 'index' %}">This is My blog</a>
+        </div>
+        <div id="login-user">
+            {% if request.user.is_authenticated %}
+                <span style="display: flex;justify-content: center;align-items:center;margin-top: 0.5em;">
+                <a class="github-user-link" href="https://github.com/{{ request.session.userName }}"><img style="margin-right: 0.5em;" src="{{ request.session.userAvatar }}&size=40">{{ request.session.userName }}</a>
+                <a style="margin-left: 0.5em;" href="{% url 'logout' %}?next={{ request.path }}">注销</a>
+                </span>
+            {% else %}
+                <span style="display: flex;justify-content: center;align-items:center;">
+                    <a style="margin-top: 1em;" href="javascript:void(0)" onclick="userLogin()">登录</a>
+                </span>
+            {% endif %}
+        </div>
+        <div id="login-outer">
+            <div id="login-inter">
+                <a class="github-login-cancel" href="javascript:void(0)" onclick="userLoginCancel()">取消</a>
+                <a class="github-login" href="{{ github_oauth_url }}"><img src="{% static 'media/icon/github.png' %}" style="width: 100px;height: 100px;"/></a>
+            </div>
+        </div>
+    </div>
+
+    <div id="nave">
+        <hr size="3" color="gray">
+    </div>
+
+    <div id="content">
+        <div class="left-sidebar">
+            <div class="logo">
+                <img src="{% static 'media/icon/logo.jpg'%}" height="100px" width="100px">
+            </div>
+            <div class="subhead">
+                <aside>做一只有梦想的猪^(*￣(oo)￣)^,asds
+                asdasdasd
+                asdasdasd</aside>
+            </div>
+            <div class="about">
+                <h2>简介</h2>
+                <table>
+                    <tr>
+                        <th>电话：</th>
+                        <td>13111123123</td>
+                    </tr>
+                    <tr>
+                        <th>地址：</th>
+                        <td>朝阳门大街</td>
+                    </tr>
+                    <tr>
+                        <th>项目：</th>
+                        <td><a href="#">http://github</a></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="category">
+                <h2>分类</h2>
+                {% get_all_categorys as all_categorys %}
+                <ul>
+                    {% for category in all_categorys %}
+                        <li><a href="{% url 'category' cate=category %}">
+                            {{ category }}<span>({{ category.num_article }})</span>
+                        </a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="archive">
+                <h2>归档</h2>
+                {% get_archives as archives %}
+                <ul>
+                    {% for archive in archives %}
+                        <li><a href="{% url 'archive' date=archive|date:'Y-m' %}">{{ archive|date:"Y-m" }}<span>({{ archive|date:"m"|month_article_num}})</span></a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="article">
+            {% block content %}{% endblock %}
+        </div>
+        <div class="right-sidebar">
+            <div class="search">
+                <form method="GET" id="search-form" action="{% url 'search' %}">
+                    <input type="search" name="q" placeholder="全文搜索..." required>
+                    <button type="submit">搜索</button>
+                </form>
+            </div>
+            <div class="latest-article">
+                <h4>最新文章</h4>
+                {% get_latest_article as latest_articles %}
+                <ul>
+                    {% for article in latest_articles %}
+                        <li><a href="{% url 'article' article.id %}">{{ article }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="latest-comment">
+                <h4>最新评论</h4>
+                {% get_latest_comment as latest_comments %}
+                <ul>
+                    {% for comment in latest_comments %}
+                        <li>
+                            <a class="github-user-link" href="{% url 'article' comment.article.id %}"><img src="{{ comment.user.profile.avatar }}&size=40">{{ comment.user }}：{{ comment.content }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="friend-links">
+                <h4>友情链接</h4>
+                {% get_friendLikns as friendLink %}
+                {% if friendLink %}
+                    <ul>
+                    {% for friend in friendLink %}
+                        <li>
+                            <span><a href="{{ friend.link }}">{{ friend.name }}</a></span>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                {% else %}
+                    <ul>
+                        <li><span style="font-size: 14px;">广告位招商中>>></span></li>
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div id="footer">
+        <hr>
+        <b>This blog end.</b>
+    </div>
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="{% static "js/base.js" %}"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load fblog_tags %}
+
+{% block title %}搜索{% endblock %}
+
+{% block content %}
+    {% if error_msg %}
+    <p>{{ error_msg }}</p>
+    {% endif %}
+  {% for article in article_list %}
+        {% autoescape off %}
+            <h1><a href="{% url 'article' article.id %}">{{ article.title|highlight:q }}</a></h1>
+            {% if article.content|has_words:q %}
+                <span>{{ article.content|highlight:q|truncatewords:10 }}</span>
+            {% endif %}
+        {% endautoescape %}
+  {% empty %}
+    <div class="no-article">暂时还没有发布的文章！</div>
+  {% endfor %}
+{% endblock %}

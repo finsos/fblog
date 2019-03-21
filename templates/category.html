@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}分类{% endblock %}
+{% block content %}
+    <ul style="list-style: none;">
+    {% for article in article_list %}
+        <li><a href="{% url 'article' article.id %}"><h2>{{ article }}</h2></a></li>
+    {% endfor %}
+    </ul>
+{% endblock %}
