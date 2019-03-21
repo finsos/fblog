@@ -39,5 +39,3 @@ urlpatterns = [
     path('archive/<str:date>/', web_views.ArchiveView.as_view(), name='archive'),
     re_path(r'^upload/image/$', upload.uploadImage, name='upload_image'),
 ]
-
-handler403 = 'web_views.permission_denied'
