@@ -9,6 +9,7 @@
 from django import template
 from django.db.models.aggregates import Count
 from ..models import ArticleCategory, Article, ArticleComment, FriendLink
+from fblog import settings
 
 register = template.Library()
 
@@ -38,6 +39,10 @@ def get_latest_comment():
 @register.simple_tag
 def get_friendLikns():
     return FriendLink.objects.filter(valid=True)
+
+@register.simple_tag
+def get_blog_title():
+    return list(settings.FBLOG_TITLE)
 
 @register.filter(name='count_words')
 def count_words(value):

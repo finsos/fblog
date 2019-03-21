@@ -10,9 +10,10 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
+    {% get_blog_title as blog_title %}
     <div id="header">
         <div>
-            <a class="title" href="{% url 'index' %}">This is My blog</a>
+            <a class="title" href="{% url 'index' %}">{{ blog_title|first }}</a>
         </div>
         <div id="login-user">
             {% if request.user.is_authenticated %}
@@ -44,9 +45,7 @@
                 <img src="{% static 'media/icon/logo.jpg'%}" height="100px" width="100px">
             </div>
             <div class="subhead">
-                <aside>做一只有梦想的猪^(*￣(oo)￣)^,asds
-                asdasdasd
-                asdasdasd</aside>
+                <aside>{{ blog_title|last }}</aside>
             </div>
             <div class="about">
                 <h2>简介</h2>

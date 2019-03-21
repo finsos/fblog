@@ -27,6 +27,8 @@ textarea {
     font-family: arial,"Hiragino Sans GB","Microsoft Yahei",sans-serif;
 */
 .logo {
+    height: 100px;
+    width: 200px;
     text-align: left;
 }
 
@@ -38,6 +40,7 @@ textarea {
 #header a.title {
     float: left;
     text-shadow: 5px 5px 5px silver;
+    margin-left: 0.5em;
     font-size: 2.5em;
     font-weight: bold;
 

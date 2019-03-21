@@ -130,3 +130,6 @@ MEDIA_URL = '/static/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static','media')
 MEDIA_IMAGE_ROOT = os.path.join(MEDIA_ROOT, 'image', '')
 MEDIA_COVER_ROOT = os.path.join(MEDIA_ROOT, 'cover', '')
+
+# Customer Settings
+FBLOG_TITLE = ('看尽世间繁华', '做一只带着翅膀追寻梦想的猪~')
