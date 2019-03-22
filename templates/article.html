@@ -38,7 +38,7 @@
         <div id="comment-list">
             {% for comment in comment_list %}
                 <li style="list-style: none;">
-                  <span id="comment-user"><a class="github-user-link" style="align-items:center;" href="https://github.com/{{ comment.user.profile.user|default:'#' }}"><img src="{{ comment.user.profile.avatar }}&size=40">{{ comment.user }}</a>&nbsp说：</span>
+                  <span id="comment-user"><a class="github-user-link" style="align-items:center;" href="https://github.com/{{ comment.user.profile.user|default:'#' }}"><img src="{{ comment.user.profile.avatar|default:'https://avatars3.githubusercontent.com/u/35519294?v=4' }}&size=40">{{ comment.user }}</a>&nbsp说：</span>
                   <span id="comment-user-id" hidden>{{ comment.user_id }}</span>
                   <span id="comment-id" style="color: gray;font-size: 14px;float: right;">#{{ forloop.revcounter }}</span>
                   <div id="comment-content" style="padding-bottom: 0.5em;padding-top: 0.2em;padding-left: 2em;">
@@ -55,7 +55,7 @@
                       {% for reply in reply_list %}
                           {% if reply.comment_id == comment.id %}
                               <div id="reply-list">
-                                  <span class="username"><a class="github-user-link" style="align-items:center;" href="https://github.com/{{ reply.user.profile.user|default:'#' }}"><img src="{{ reply.user.profile.avatar }}&size=40">{{ reply.user }}</a>&nbsp>>><a class="github-user-link" href="https://github.com/{{ reply.reply.user.profile.user|default:'#' }}"><img src="{{ reply.reply.user.profile.avatar }}&size=40">{{ reply.reply.user|default:comment.user }}：</a></span>
+                                  <span class="username"><a class="github-user-link" style="align-items:center;" href="https://github.com/{{ reply.user.profile.user|default:'#' }}"><img src="{{ reply.user.profile.avatar|default:'https://avatars3.githubusercontent.com/u/35519294?v=4' }}&size=40">{{ reply.user }}</a>&nbsp>>><a class="github-user-link" href="https://github.com/{{ reply.reply.user.profile.user|default:'#' }}"><img src="{{ reply.reply.user.profile.avatar }}&size=40">{{ reply.reply.user|default:comment.user }}：</a></span>
                                 <div style="padding-bottom: 0.5em;padding-top: 0.2em;padding-left: 2em;">
                                     {{ reply.content }}
                                 </div>

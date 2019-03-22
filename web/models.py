@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.forms import ModelForm, HiddenInput
-from django.conf import settings
 from django.utils.html import strip_tags
 import markdown
 # Create your models here.
@@ -14,7 +13,7 @@ class Article(models.Model):
 
     title = models.CharField('标题', max_length=70)
     cover = models.ImageField(
-        upload_to=settings.MEDIA_COVER_ROOT,
+        upload_to='cover',
         blank=True, null=True, verbose_name='封面图')
     content = models.TextField('正文')
     created_time = models.DateTimeField('创建时间', auto_now_add=True)

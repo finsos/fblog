@@ -25,7 +25,7 @@ from web import upload
 urlpatterns = [
     path('admin/', admin.site.urls),
     path(r'favicon.ico', RedirectView.as_view(url=settings.STATIC_URL+r'media/icon/favicon.ico')),
-    path('index/', web_views.IndexView.as_view(), name='index'),
+    path('', web_views.IndexView.as_view(), name='index'),
     path('search/', web_views.SearchView, name='search'),
     path('login/', web_views.OAuthLoginView.as_view(), name='login'),
     #github回调url

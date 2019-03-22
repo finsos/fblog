@@ -18,7 +18,7 @@
         <div id="login-user">
             {% if request.user.is_authenticated %}
                 <span style="display: flex;justify-content: center;align-items:center;margin-top: 0.5em;">
-                <a class="github-user-link" href="https://github.com/{{ request.session.userName }}"><img style="margin-right: 0.5em;" src="{{ request.session.userAvatar }}&size=40">{{ request.session.userName }}</a>
+                <a class="github-user-link" href="https://github.com/{{ request.session.userName }}"><img style="margin-right: 0.5em;" src="{{ request.session.userAvatar|default:'https://avatars3.githubusercontent.com/u/35519294?v=4' }}&size=40">{{ request.session.userName }}</a>
                 <a style="margin-left: 0.5em;" href="{% url 'logout' %}?next={{ request.path }}">注销</a>
                 </span>
             {% else %}
