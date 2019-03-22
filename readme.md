@@ -11,7 +11,7 @@
 - 采用Nginx做静态web服务、反向代理
 - 采用uWSGI做服务网关
 
-#### Deply
+#### Deploy
 - 初始化数据库
 ```
 python manage.py makemigrations
