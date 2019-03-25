@@ -103,8 +103,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # oauth for github
-GITHUB_CLIENT_ID = '9c37e6a99bee4c7dcf43'
-GITHUB_SECRET_KEY = '00a1c24fbfde10925f08509956ef6b2f41d0f387'
+GITHUB_CLIENT_ID = ''
+GITHUB_SECRET_KEY = ''
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
