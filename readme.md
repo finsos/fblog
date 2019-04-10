@@ -44,6 +44,6 @@ server {
 }
 ```
 
-#### FQA
+#### FAQ
 1. web目录下必须存在migrations这个包目录，不然无法初始化数据库，访问都会报500错误
 2. uWSGI可以配置创建socket或者监听端口，socket采用unix://协议转发
